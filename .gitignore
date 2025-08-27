@@ -1,0 +1,75 @@
+# Compilados de Python
+_pycache_/
+*.py[cod]
+*$py.class
+
+# Entornos virtuales
+.venv/
+venv/
+ENV/
+env/
+.conda/
+
+# Archivos de configuración local
+*.env
+*.local
+*.config
+
+# Archivos de logs y bases de datos locales
+*.log
+*.sqlite3
+*.db
+
+# Directorios de salida
+dist/
+build/
+develop-eggs/
+.eggs/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Cachés y temporales
+*.bak
+*.swp
+*.tmp
+*.temp
+*.cache/
+.ipynb_checkpoints/
+.mypy_cache/
+.pytest_cache/
+.pyre/
+.dmypy.json
+dmypy.json
+_pypackages_/
+
+# IDEs y editores
+.vscode/
+.idea/
+*.iml
+
+# Cobertura y pruebas
+htmlcov/
+.tox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+*.hypothesis/
+
+# Documentación generada
+docs/_build/
+site/
+
+# Distribuciones de pip
+pip-wheel-metadata/
+
+# Archivos de Jupyter
+*.ipynb_checkpoints
+
+# Archivos de sistemas operativos
+.DS_Store
+Thumbs.db
