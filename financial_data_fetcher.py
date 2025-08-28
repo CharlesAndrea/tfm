@@ -1,12 +1,9 @@
 import logging
 import sys
-from pathlib import Path
-from typing import Dict, Any
-
 import pandas as pd
-import yaml
 import yfinance as yf
 from utilities.parquet_utils import ParquetManager
+from utilities.general_utils import ConfigLoader
 
 # Constants
 TRADING_DAYS_PER_YEAR = 252.0
@@ -19,7 +16,7 @@ logging.basicConfig(
     format='%(asctime)s - %(levelname)s - %(message)s',
     handlers=[
         logging.StreamHandler(sys.stdout),
-        logging.FileHandler('financial_data_fetch.log')
+        logging.FileHandler('./logs/financial_data_fetch.log')
     ]
 )
 logger = logging.getLogger(__name__)
@@ -33,40 +30,11 @@ class FinancialDataFetcher:
         Args:
             config_path: Path to the configuration YAML file
         """
-        self.config = self._load_config(config_path)
-        self.parquet_manager = ParquetManager()
 
-    def _load_config(self, config_path: str) -> Dict[str, Any]:
-        """
-        Load configuration from YAML file.
+        self.parquet_manager = ParquetManager()
+        self.config_loader = ConfigLoader()
+        self.config = self.config_loader._load_config(config_path)
         
-        Args:
-            config_path: Path to configuration file
-            
-        Returns:
-            Configuration dictionary
-            
-        Raises:
-            FileNotFoundError: If config file doesn't exist
-            yaml.YAMLError: If config file is invalid YAML
-        """
-        try:
-            config_file = Path(config_path)
-            if not config_file.exists():
-                raise FileNotFoundError(f"Configuration file not found: {config_path}")
-            
-            with open(config_file, 'r', encoding='utf-8') as f:
-                config = yaml.safe_load(f)
-            
-            logger.info(f"Configuration loaded from {config_path}")
-            return config
-            
-        except yaml.YAMLError as e:
-            logger.error(f"Error parsing YAML configuration: {e}")
-            raise
-        except Exception as e:
-            logger.error(f"Unexpected error loading configuration: {e}")
-            raise
     
     def fetch_prices_data(self) -> pd.DataFrame:
         """
