@@ -1,3 +1,9 @@
+"""
+    This module retrieves from yahoo finance: 
+    - Adjusted close price for ticker list, adjusting for dividends and splits
+    -Risk-free data (^IRX close prices) 
+"""
+
 import logging
 import sys
 import pandas as pd
